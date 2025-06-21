@@ -12,8 +12,10 @@ from brutils.voter_id import (
     is_valid,
 )
 
-
 class TestIsValid(TestCase):
+
+    # Testes existentes
+
     def test_valid_voter_id(self):
         # test a valid voter id number
         voter_id = "217633460930"
@@ -115,6 +117,19 @@ class TestIsValid(TestCase):
         self.assertIsNone(format_voter_id("000000000000"))
         self.assertIsNone(format_voter_id("800911840197"))
 
+    # Melhorias adicionais
+
+    def test_none_input(self):
+        self.assertFalse(is_valid(None))  # Entrada None
+
+    def test_empty_string(self):
+        self.assertFalse(is_valid(""))  # String vazia
+
+    def test_invalid_type_list(self):
+        self.assertFalse(is_valid(["627777060172"]))  # Tipo lista
+
+    def test_special_characters_input(self):
+        self.assertFalse(is_valid("6277!7060172"))  # Caracteres especiais
 
 if __name__ == "__main__":
     main()
